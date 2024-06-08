@@ -1,7 +1,7 @@
 # LaserScan-based-Odom-source
 We are discussing if LaserScan based Odom source can replace IMU based odom, rf2o_laser_odometery and laser_scan_matcher are discussed here
 
----- #USING 2024 UW Engine Capstone Project Autonomous Self-Driving Wheelchair(Sponsored by Cyberworks Robotics) as an example to test this possibility----
+# USING 2024 UW Engine Capstone Project Autonomous Self-Driving Wheelchair(Sponsored by Cyberworks Robotics) as an example to test this possibility
 
 ASDW Map and Navigation documentation 
 
