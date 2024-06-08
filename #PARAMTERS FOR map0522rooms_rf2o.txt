@@ -1,0 +1,89 @@
+#PARAMTERS FOR map0522rooms_good.pgm
+
+scan source:
+
+richbeam lidar 1L
+
+  <node name="richbeam_lidar" pkg="lakibeam1" type="lakibeam1_scan_node" output="screen">
+    <remap from="/richbeam_lidar/scan" to="/scan" />
+        <param name="frame_id" type="string" value="laser"/><!--frame_id设置-->
+        <param name="output_topic" type="string" value="scan" /><!--topic设置-->
+        <param name="inverted" type="bool" value="false"/><!--配置是否倒装,true倒装-->
+        <param name="hostip" type="string" value="0.0.0.0"/><!--配置本机监听地址，0.0.0.0表示监听全部-->
+        <param name="sensorip" type="string" value="192.168.198.2"/><!--配置sensor地址-->
+        <param name="port" type="string" value="2368"/><!--配置本机监听端口-->
+        <param name="angle_offset" type="int" value="0"/><!--配置点云旋转角度，可以是负数-->
+
+        <param name="scanfreq" type="string" value="30" /><!--配置扫描频率，范围：10、20、25、30-->
+        <param name="filter" type="string" value="3" /><!--配置滤波选项，范围：3、2、1、0 -->
+        <param name="laser_enable" type="string" value="true" /><!--雷达扫描使能，范围：true、false-->
+        <param name="scan_range_start" type="string" value="45" /><!--雷达扫描起始角度，范围：45~315-->
+        <param name="scan_range_stop" type="string" value="315" /><!--雷达扫描结束角度，范围：45~315，结束角度必须大于起始角度-->
+  </node>
+
+odom source:
+
+rf2o_laser_odometry
+
+  <node pkg="rf2o_laser_odometry" type="rf2o_laser_odometry_node" name="rf2o_laser_odometry" output="screen">
+    <param name="laser_scan_topic" value="/scan"/>                         <!-- topic where the lidar scans are being published -->
+    <param name="odom_topic" value="/odom" />                              <!-- topic where to publish the odometry estimations -->
+    <param name="publish_tf" value="true" />                               <!-- whether or not to publish the tf::transform (base->odom) -->
+    <param name="base_frame_id" value="/base_link"/>                       <!-- frame_id (tf) of the mobile robot base -->
+    <param name="odom_frame_id" value="/odom" />                           <!-- frame_id (tf) to publish the odometry estimations -->
+    <param name="init_pose_from_topic" value="" />                         <!-- Leave empty to start at point (0,0) -->
+    <param name="freq" value="20.0"/>                                      <!-- Increase frequency to 20 Hz for smoother updates -->
+    <param name="verbose" value="true"/>                                   <!-- verbose -->
+    <param name="use_keyframe" value="true"/>                              <!-- Use keyframe-based odometry for better stability -->
+    <param name="max_iterations" value="10"/>                              <!-- Maximum iterations for the optimization -->
+    <param name="min_inliers" value="30"/>                                 <!-- Minimum inliers for a valid estimation -->
+    <param name="threshold" value="0.1"/>                                  <!-- Threshold value for the scan matching -->
+    <param name="noise_covariance" value="[0.1, 0, 0, 0.1]"/>              <!-- Noise covariance for the odometry estimation -->
+    <param name="outlier_threshold" value="0.2"/>                          <!-- Threshold for considering a point as an outlier -->
+  </node>
+
+
+map tool:
+
+slam_toolbox
+
+    <node name="slam_toolbox" pkg="slam_toolbox" type="async_slam_toolbox_node" output="screen">
+        <param name="resolution" value="0.03"/>
+        <param name="max_laser_range" value="45.0"/>
+        <param name="minimum_travel_distance" value="0.5"/>
+        <param name="minimum_travel_heading" value="0.2"/>
+        <param name="map_update_interval" value="2.0"/>
+        <param name="laser_scan_topic" value="/scan"/>
+        <param name="odom_frame" value="odom"/>
+        <param name="map_frame" value="map"/>
+        <param name="base_frame" value="base_link"/>
+        <param name="enable_loop_closing" value="true"/>
+        <param name="loop_closure_maximum_travel_distance" value="16.0"/>
+        <param name="loop_closure_translation_threshold" value="0.45"/>
+        <param name="loop_closure_rotation_threshold" value="0.08"/>
+        <param name="loop_closure_submap_overlap" value="0.7"/>`
+    </node>
+
+wheelchair speed:
+
+indoor slow mode (~1km/h)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
