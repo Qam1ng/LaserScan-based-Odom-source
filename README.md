@@ -45,9 +45,12 @@ We are using rf2o_laser_odometery and laser_scan matcher as our odom source, it 
 
 Both rf2o and LSM packages are located in the catkin_2023 folder 
 
+rf2o (https://github.com/MAPIRlab/rf2o_laser_odometry.git)
+LSM (https://github.com/NKU-MobFly-Robotics/laser_scan_matcher.git)
+
 The current mapping launch file we use is the buildmap_lidar.launch 
 
-To do test between different odom sources and compare their fluency, use evo_traj package, also located in catkin_2023 
+To do test between different odom sources and compare their fluency, use evo_traj package, also located in catkin_2023 (https://github.com/MichaelGrupp/evo/wiki/evo_traj)
 
  
 
